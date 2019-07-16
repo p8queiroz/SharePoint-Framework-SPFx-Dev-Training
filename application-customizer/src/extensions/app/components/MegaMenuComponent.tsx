@@ -37,9 +37,9 @@ export default class MegaMenuComponent extends React.Component<IMegaMenuProps, I
     return (
       <div>
         <DefaultButton data-id="menuButton" className={styles.menuButton}
-          title="SPFx React Mega Menu"
-          text="SPFx React Mega Menu"
-          ariaLabel="SPFx React Mega Menu"
+          title="Mega Menu"
+          text="Mega Menu"
+          ariaLabel="Mega Menu"
           onClick={this.showMenu.bind(this)}
         />
 
