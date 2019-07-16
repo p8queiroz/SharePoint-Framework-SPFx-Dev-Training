@@ -4,27 +4,23 @@
   "https": true,
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://teamsite.hyattoffice.com/sites/hotelbuilddev/SitePages/Paulo.aspx",
+      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
       "customActions": {
         "aab4bbdb-dd62-436c-a991-7d9dbf73a073": {
           "location": "ClientSideExtension.ApplicationCustomizer",
           "properties": {
-            "testMessage": "Test message",
-            "Top": "Hello, Paulo Henrique Queiroz!",
-            "Bottom": "please, access the other for a full experience!"
+            "isDebug":true
           }
         }
       }
     },
     "app": {
-      "pageUrl": "https://teamsite.hyattoffice.com/sites/hotelbuilddev/SitePages/Paulo.aspx",
+      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
       "customActions": {
         "aab4bbdb-dd62-436c-a991-7d9dbf73a073": {
           "location": "ClientSideExtension.ApplicationCustomizer",
           "properties": {
-            "testMessage": "Test message",
-            "Top": "Hello, Paulo Henrique Queiroz!",
-            "Bottom": "please, access the other for a full experience!"
+            "isDebug":true
           }
         }
       }

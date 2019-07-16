@@ -1,5 +1,8 @@
+import * as React from "react";
+import * as ReactDom from "react-dom";
 import { override } from '@microsoft/decorators';
 import { Log } from '@microsoft/sp-core-library';
+
 import {
   BaseApplicationCustomizer,
   PlaceholderContent,
@@ -9,7 +12,11 @@ import { Dialog } from '@microsoft/sp-dialog';
 
 import * as strings from 'AppApplicationCustomizerStrings';
 import styles from './AppCustomizer.module.scss';
- 	import { escape } from '@microsoft/sp-lodash-subset';
+import { escape } from '@microsoft/sp-lodash-subset';
+import MegaMenuComponent from "./components/MegaMenuComponent";
+import { IMegaMenuProps } from "./components/IMegaMenuProps";
+import { IMenuProvider, MenuSPListProvider, MenuFakeProvider } from "./menuProvider/index";
+
 
 const LOG_SOURCE: string = 'AppApplicationCustomizer';
 
@@ -23,102 +30,56 @@ export interface IAppApplicationCustomizerProperties {
   testMessage: string;
   Top: string;
   Bottom: string;
+
+  isDebug: boolean;
+  rootWebOnly : boolean;
+  enableSessionStorageCache: boolean;
+
+
 }
 
 /** A Custom Action which can be run during execution of a Client Side Application */
 export default class AppApplicationCustomizer
   extends BaseApplicationCustomizer<IAppApplicationCustomizerProperties> {
 
-  private _topPlaceholder: PlaceholderContent | undefined;
-  private _bottomPlaceholder: PlaceholderContent | undefined;
-  
   @override
   public onInit(): Promise<void> {
-    Log.info(LOG_SOURCE, `Initialized ${strings.Title}`);
 
-      // Wait for the placeholders to be created (or handle them being changed) and then
-	// render.
-      this.context.placeholderProvider.changedEvent.add(this, this._renderPlaceHolders);
-	
-      return Promise.resolve<void>();
-  }
+    let placeholder: PlaceholderContent;
+    placeholder = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Top);
 
-  private _renderPlaceHolders(): void {
-    console.log("AppApplicationCustomizer._renderPlaceHolders()");
-    console.log(
-      "Available placeholders: ",
-      this.context.placeholderProvider.placeholderNames
-        .map(name => PlaceholderName[name])
-        .join(", ")
+    // init the react mega menu component.
+    const element: React.ReactElement<IMegaMenuProps> = React.createElement(
+      MegaMenuComponent,
+      {
+        menuProvider: this.getMenuProvider()
+      }
     );
 
-    // Handling the top placeholder
-    if (!this._topPlaceholder) {
-      this._topPlaceholder = this.context.placeholderProvider.tryCreateContent(
-        PlaceholderName.Top,
-        { onDispose: this._onDispose }
-      );
+    // render the react element in the top placeholder.
+    ReactDom.render(element, placeholder.domElement);
 
-      // The extension should not assume that the expected placeholder is available.
-      if (!this._topPlaceholder) {
-        console.error("The expected placeholder (Top) was not found.");
-        return;
-      }
+    return Promise.resolve();
 
-      if (this.properties) {
-        let topString: string = this.properties.Top;
-        if (!topString) {
-          topString = "(Top property was not defined.)";
-        }
-
-        if (this._topPlaceholder.domElement) {
-          this._topPlaceholder.domElement.innerHTML = `
-          <div class="${styles.app}">
-            <div class="${styles.top}">
-              <i class="ms-Icon ms-Icon--Info" aria-hidden="true"></i> ${escape(
-                topString
-              )}
-            </div>
-          </div>`;
-        }
-      }
-    }
-
-    // Handling the bottom placeholder
-    if (!this._bottomPlaceholder) {
-      this._bottomPlaceholder = this.context.placeholderProvider.tryCreateContent(
-        PlaceholderName.Bottom,
-        { onDispose: this._onDispose }
-      );
-
-      // The extension should not assume that the expected placeholder is available.
-      if (!this._bottomPlaceholder) {
-        console.error("The expected placeholder (Bottom) was not found.");
-        return;
-      }
-
-      if (this.properties) {
-        let bottomString: string = this.properties.Bottom;
-        if (!bottomString) {
-          bottomString = "(Bottom property was not defined.)";
-        }
-
-        if (this._bottomPlaceholder.domElement) {
-          this._bottomPlaceholder.domElement.innerHTML = `
-          <div class="${styles.app}">
-            <div class="${styles.bottom}">
-              <i class="ms-Icon ms-Icon--Info" aria-hidden="true"></i> ${escape(
-                bottomString
-              )}
-            </div>
-          </div>`;
-        }
-      }
-    }
   }
 
-  private _onDispose(): void {
-    console.log('[HelloWorldApplicationCustomizer._onDispose] Disposed custom top and bottom placeholders.');
+  protected getMenuProvider(): IMenuProvider {
+
+    if (this.properties.isDebug) {
+      return new MenuFakeProvider();
+    }
+
+    // get the current web absolute url by default.
+    let webUrl: string = this.context.pageContext.web.absoluteUrl;
+
+    if (this.properties.rootWebOnly) {
+
+      // if rootWebOnly property enabled then use
+      // the SharePoint root web mega menu list.
+      webUrl = this.context.pageContext.site.absoluteUrl;
+    }
+
+    return new MenuSPListProvider(webUrl, this.properties.enableSessionStorageCache);
   }
 
 
