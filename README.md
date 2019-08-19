@@ -1,4 +1,4 @@
-# SharePoint Framework Extensions - SPFx
+# SharePoint Framework Extensions - SPFx Extensions
 
 This application covers one important concept in SharePoint Framework Development known as SharePoint Framework Extensions.
 
@@ -37,24 +37,3 @@ Each package produces the following:
 ## UML diagrams
 
 The main diagram of the application :
-
-```mermaid
-sequenceDiagram
-A ->> B: Hello Bob, how are you?
-B-->>J: How about you John?
-B--x A: I am good thanks!
-B-x J: I am good thanks!
-Note right of J: B <br/> test <br/>that the text does<br/>not fit on a row.
-
-Bob-->Alice: ...
-A-> J: Yes... J?
-```
-And this will produce a flow chart:
-
-```mermaid
-graph LR
-A[Square Rect] -- Link text --> B((Circle))
-A --> C(Round Rect)
-B --> D{Rhombus}
-C --> D
-```
