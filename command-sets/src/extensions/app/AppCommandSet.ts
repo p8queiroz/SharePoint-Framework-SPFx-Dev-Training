@@ -27,12 +27,14 @@ export default class AppCommandSet extends BaseListViewCommandSet<IAppCommandSet
 
   @override
   public onInit(): Promise<void> {
+    debugger;
     Log.info(LOG_SOURCE, 'Initialized AppCommandSet');
     return Promise.resolve();
   }
 
   @override
   public onListViewUpdated(event: IListViewCommandSetListViewUpdatedParameters): void {
+    debugger;
     const compareOneCommand: Command = this.tryGetCommand('COMMAND_1');
     if (compareOneCommand) {
       // This command should be hidden unless exactly one row is selected.

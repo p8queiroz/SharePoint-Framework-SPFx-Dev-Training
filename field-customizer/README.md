@@ -24,20 +24,3 @@ gulp test - TODO
 gulp serve - TODO
 gulp bundle - TODO
 gulp package-solution - TODO
-
-
-
-** Up till now, there's a bug that doesn't allow the command set buttons to be visible in the toolbar of the list while debbugin using gulp serve.
-
-
-
-
-
-
-
-
-
-
-
-
-
