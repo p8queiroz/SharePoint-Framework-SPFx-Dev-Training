@@ -9,7 +9,7 @@
         "InternalFieldName": {
           "id": "6c7ac4c6-73d1-43f7-a6ed-581a45e3c875",
           "properties": {
-            "sampleText": "Value"
+            "units": "metric"
           }
         }
       }
@@ -20,7 +20,7 @@
         "InternalFieldName": {
           "id": "6c7ac4c6-73d1-43f7-a6ed-581a45e3c875",
           "properties": {
-            "sampleText": "Value"
+            "units": "metric"
           }
         }
       }
