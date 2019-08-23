@@ -1,4 +1,4 @@
-# SharePoint Framework Extensions - SPFx Extensions
+# SharePoint Framework - Concepts and demos
 
   
 
