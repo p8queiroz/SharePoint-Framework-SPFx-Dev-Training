@@ -18,7 +18,7 @@ Write-Host -ForegroundColor Yellow "Applying Template: $FilePath"
 try
 {
     Connect-PnPOnline -Url $TargetSiteUrl -ErrorAction Stop -UseWebLogin
-
+    
     Apply-PnPProvisioningTemplate -Path $FilePath
 
     Disconnect-PnPOnline

@@ -9,25 +9,28 @@ import {
 } from '@microsoft/sp-listview-extensibility';
 
 import * as strings from 'AppFieldCustomizerStrings';
-import App, { IAppProps } from './components/App';
+import AppFieldCustomizer, { IAppProps } from './components/App';
+import  WeatherService  from './services/WeatherService';
+import { IService }  from './interfaces/IService';
 
 /**
  * If your field customizer uses the ClientSideComponentProperties JSON input,
  * it will be deserialized into the BaseExtension.properties object.
  * You can define an interface to describe it.
  */
-export interface IAppFieldCustomizerProperties {
+export interface IAppFieldCustomizerConfigProperties {
   // This is an example; replace with your own property
-  sampleText?: string;
+  units?: string;
 }
 
 const LOG_SOURCE: string = 'AppFieldCustomizer';
 
-export default class AppFieldCustomizer
-  extends BaseFieldCustomizer<IAppFieldCustomizerProperties> {
+export default class AppFieldCustomizerConfig
+  extends BaseFieldCustomizer<IAppFieldCustomizerConfigProperties> {
 
   @override
   public onInit(): Promise<void> {
+    debugger;
     // Add your custom initialization to this method.  The framework will wait
     // for the returned promise to resolve before firing any BaseFieldCustomizer events.
     Log.info(LOG_SOURCE, 'Activated AppFieldCustomizer with properties:');
@@ -39,12 +42,16 @@ export default class AppFieldCustomizer
   @override
   public onRenderCell(event: IFieldCustomizerCellEventParameters): void {
     // Use this method to perform your custom cell rendering.
-    const text: string = `${this.properties.sampleText}: ${event.fieldValue}`;
+    const units: string = this.properties.units;
 
-    const app: React.ReactElement<{}> =
-      React.createElement(App, { text } as IAppProps);
+    const mainApp: React.ReactElement<{}> =
+      React.createElement(AppFieldCustomizer, {
+        units: units,
+        location: event.fieldValue,
+        weatherService: WeatherService
+      });
 
-    ReactDOM.render(app, event.domElement);
+    ReactDOM.render(mainApp, event.domElement);
   }
 
   @override
@@ -55,4 +62,6 @@ export default class AppFieldCustomizer
     ReactDOM.unmountComponentAtNode(event.domElement);
     super.onDisposeCell(event);
   }
+
+  
 }
