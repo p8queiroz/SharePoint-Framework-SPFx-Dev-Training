@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "business-app-birthdays-client-side-solution",
+    "id": "ad262da5-31d4-47a0-bea4-ef21c4436d6a",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/business-app-birthdays.sppkg"
+  }
+}
