@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "business-app-client-side-solution",
-    "id": "d78ba4d9-fec2-410f-8bbd-eaa9b46d5eec",
+    "name": "business-app-docs-client-side-solution",
+    "id": "3db94a7a-b387-4fdd-be0c-82ac418c06fa",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "isDomainIsolated": false
   },
   "paths": {
-    "zippedPackage": "solution/business-app.sppkg"
+    "zippedPackage": "solution/business-app-docs.sppkg"
   }
 }

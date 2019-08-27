@@ -7,19 +7,19 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 
-import * as strings from 'MainAppWebPartStrings';
-import MainApp from './components/MainApp';
-import { IMainAppProps } from './components/IMainAppProps';
+import * as strings from 'BusinessAppDocsWebPartStrings';
+import BusinessAppDocs from './components/BusinessAppDocs';
+import { IBusinessAppDocsProps } from './components/IBusinessAppDocsProps';
 
-export interface IMainAppWebPartProps {
+export interface IBusinessAppDocsWebPartProps {
   description: string;
 }
 
-export default class MainAppWebPart extends BaseClientSideWebPart<IMainAppWebPartProps> {
+export default class BusinessAppDocsWebPart extends BaseClientSideWebPart<IBusinessAppDocsWebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<IMainAppProps > = React.createElement(
-      MainApp,
+    const element: React.ReactElement<IBusinessAppDocsProps > = React.createElement(
+      BusinessAppDocs,
       {
         description: this.properties.description
       }

@@ -1,4 +1,4 @@
-## business-app
+## business-app-docs
 
 This is where you include your WebPart documentation.
 

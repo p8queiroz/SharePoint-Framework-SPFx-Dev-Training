@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "business-app-docs-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/businessAppDocs/BusinessAppDocsWebPart.js",
+          "manifest": "./src/webparts/businessAppDocs/BusinessAppDocsWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "BusinessAppDocsWebPartStrings": "lib/webparts/businessAppDocs/loc/{locale}.js"
+  }
+}

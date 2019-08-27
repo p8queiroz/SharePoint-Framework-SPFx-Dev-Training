@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styles from './MainApp.module.scss';
-import { IMainAppProps } from './IMainAppProps';
+import styles from './BusinessAppDocs.module.scss';
+import { IBusinessAppDocsProps } from './IBusinessAppDocsProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel';
@@ -79,12 +79,12 @@ const controlStyles = {
 };
 
 
-export default class MainApp extends React.Component<IMainAppProps, IMainAppState> {
+export default class BusinessAppDocs extends React.Component<IBusinessAppDocsProps, IMainAppState> {
 
   private _selection: Selection;
   private _allItems: IDocument[];
 
-  constructor(props: IMainAppProps) {
+  constructor(props: IBusinessAppDocsProps) {
     super(props);
     this._allItems = _generateDocuments();
 
@@ -184,7 +184,8 @@ export default class MainApp extends React.Component<IMainAppProps, IMainAppStat
 
   }
 
-  public render(): React.ReactElement<IMainAppProps> {
+
+  public render(): React.ReactElement<IBusinessAppDocsProps> {
     const { columns, isCompactMode, items, selectionDetails, isModalSelection } = this.state;
 
     return (
@@ -232,6 +233,7 @@ export default class MainApp extends React.Component<IMainAppProps, IMainAppStat
     );
   }
 
+  
   public componentDidUpdate(previousProps: any, previousState: IMainAppState) {
     if (previousState.isModalSelection !== this.state.isModalSelection && !this.state.isModalSelection) {
       this._selection.setAllSelected(false);
@@ -298,8 +300,9 @@ export default class MainApp extends React.Component<IMainAppProps, IMainAppStat
   private _hidePanel = (): void => {
     this.setState({ isPanelOpen: false });
   };
-
 }
+
+
 
 function _copyAndSort<T>(items: T[], columnKey: string, isSortedDescending?: boolean): T[] {
   const key = columnKey as keyof T;
