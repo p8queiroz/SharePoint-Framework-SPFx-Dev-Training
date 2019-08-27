@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "business-app-employees-client-side-solution",
+    "id": "2ee889f4-ac07-4d20-b92b-ebd803eead1a",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/business-app-employees.sppkg"
+  }
+}
